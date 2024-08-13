@@ -1,0 +1,168 @@
+#include <16f876.h>
+#fuses xt,nowdt,noput,nobrownout,nolvp,noprotect
+#device adc=10
+#use delay(clock= 4M)
+#include <lcd.c>
+#use standard_io(C)
+#use standard_io(A)
+
+enum funciones{med,cal,ini};  // asigna un valor a cada elemento  
+                               // med=0 , cal = 1  e ini = 2
+                               
+void medir(void){    // algoritmo correspondiente 
+int i;
+    output_high(PIN_C0);
+    lcd_gotoxy(3,1);
+ for(i=0;i<=30;i++){
+    lcd_putc("\f");
+    delay_ms(200);
+    lcd_gotoxy(3,1);
+    lcd_putc("Refrigerando");
+    lcd_gotoxy(5,2);
+    lcd_putc("espere");
+    delay_ms(1400);
+}
+
+    output_low(PIN_C0);
+    lcd_putc("\f");
+}
+
+void calibrar(void){   // algoritmo correspondiente 
+int i;
+    output_high(PIN_C0);
+    lcd_gotoxy(3,1);
+for(i=0;i<=60;i++){
+    lcd_putc("\f");
+    delay_ms(200);
+    lcd_gotoxy(3,1);
+    lcd_putc("Refrigerando");
+    lcd_gotoxy(5,2);
+    lcd_putc("espere");
+    delay_ms(1400);
+}
+    output_low(PIN_C0);
+    lcd_putc("\f");
+}
+
+void inicializar(void){   // algoritmo correspondiente 
+int i;
+    output_high(PIN_C0);
+    lcd_gotoxy(3,1);
+for(i=0;i<=90;i++){
+    lcd_putc("\f");
+    delay_ms(200);
+    lcd_gotoxy(3,1);
+    lcd_putc("Refrigerando");
+    lcd_gotoxy(5,2);
+    lcd_putc("espere");
+    delay_ms(1400);
+}
+    output_low(PIN_C0);
+    lcd_putc("\f");
+}
+
+
+void run_func(int numfunc){   // asignación de la funcion a realizar viene dada por la variable item 
+
+switch(numfunc){
+case med:
+medir();
+break;
+case cal:
+calibrar();
+break;
+case ini:
+inicializar();
+break;
+
+}
+
+}
+
+void main(){
+float temper, medicion;
+char item;  // variables de funciones 
+char n_menus = 3;
+
+    lcd_init();
+  
+while(1){                  
+    setup_adc (adc_clock_internal);
+    setup_adc_ports(AN0);
+    set_adc_channel (0);
+    medicion=read_adc ();
+    setup_adc (adc_off);
+    temper=medicion*(0.48875);
+    lcd_gotoxy(8,1);
+    delay_ms(300);
+    printf(lcd_putc, "%02.1f",temper);
+    lcd_gotoxy(12,1);
+    lcd_putc("oC");
+
+if (medicion*(0.48875)>=4){
+     output_high(pin_C1) ;
+}
+if (medicion*(0.48875)<4){
+    output_low(pin_C1);
+}
+
+
+
+                            // detecta boton  de seleccion
+if (input(PIN_A1)==1){     //   
+    item++;                    // aumenta la variable  
+    delay_ms(100);             // evitar rebotes
+    lcd_putc('\f');
+}
+if(item >(n_menus-1)){     // si la variable supera  el numero de funciones   
+    item=0;                    // inicializa la variable
+}
+
+switch(item){
+case 0:
+    lcd_gotoxy(3,1);
+    lcd_putc("Temp=");
+    lcd_gotoxy(3,2);
+    printf(lcd_putc,"Minutos : 1");
+    lcd_gotoxy(3,2);
+break;
+
+case 1:
+    lcd_gotoxy(3,1);
+    lcd_putc("Temp=");
+    lcd_gotoxy(3,2);
+    printf(lcd_putc,"Minutos : 2");
+    lcd_gotoxy(3,2);
+break;
+
+case 2:
+    lcd_gotoxy(3,1);
+    lcd_putc("Temp=");
+    lcd_gotoxy(3,2);
+    printf(lcd_putc,"Minutos : 3");
+    lcd_gotoxy(3,2);
+break;
+
+
+}
+
+if (input(PIN_A2)==1 & input(PIN_A3)==1){
+    delay_ms(100);
+    run_func(item);
+}
+
+
+}
+
+
+
+
+
+
+}
+
+
+
+
+
+

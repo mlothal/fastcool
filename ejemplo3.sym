@@ -1,0 +1,162 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+006     lcd
+006     lcdlat
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021-024 MAIN.temper
+025-028 MAIN.medicion
+029     MAIN.item
+02A     MAIN.n_menus
+02B     run_func.numfunc
+02B-02E @PRINTF_L32D_620FPFPF.P1
+02B     lcd_init.i
+02B-02C @ITOF.P1
+02B     MAIN.@SCRATCH1
+02C     medir.i
+02C     inicializar.i
+02C     calibrar.i
+02C     lcd_init.@SCRATCH1
+02C     MAIN.@SCRATCH2
+02D     medir.@SCRATCH1
+02D     @PSTRINGC7_620.@SCRATCH1
+02D     calibrar.@SCRATCH1
+02D     inicializar.@SCRATCH1
+02D     MAIN.@SCRATCH3
+02E     @PSTRINGC7_620.@SCRATCH2
+02E     MAIN.@SCRATCH4
+02F     @PRINTF_L32D_620FPFPF.P1
+02F-032 @FLT.P2
+02F     @PSTRINGC7_620.@SCRATCH3
+030     @PSTRINGC7_620.@SCRATCH4
+030     @PRINTF_L32D_620FPFPF.@SCRATCH1
+031     @PRINTF_L32D_620FPFPF.@SCRATCH2
+032     @PRINTF_L32D_620FPFPF.@SCRATCH3
+033-036 @FLT.P1
+033     @PRINTF_L32D_620FPFPF.@SCRATCH4
+034     @PRINTF_L32D_620FPFPF.@SCRATCH5
+035     @PRINTF_L32D_620FPFPF.@SCRATCH6
+036     @PRINTF_L32D_620FPFPF.@SCRATCH7
+037     @PRINTF_L32D_620FPFPF.@SCRATCH8
+037     @FLT.@SCRATCH1
+038-03B @DIV3232.P1
+038-03B @MULFF.P2
+038     lcd_putc.c
+038-03B @FTOSD.P1
+038     @FLT.@SCRATCH2
+039     lcd_gotoxy.x
+039     @delay_ms1.P1
+03A     lcd_gotoxy.y
+03B     lcd_gotoxy.address
+03C-03F @DIV3232.P1
+03C-03F @MULFF.P2
+03C     lcd_gotoxy.@SCRATCH1
+03C     @FTOSD.@SCRATCH1
+03D     lcd_send_byte.address
+03E     lcd_send_byte.n
+03F     lcd_read_byte.low
+03F     lcd_send_byte.@SCRATCH1
+040     lcd_read_byte.high
+040     lcd_send_nibble.n
+040     @MULFF.@SCRATCH1
+040     @DIV3232.@SCRATCH1
+041     lcd_read_byte.@SCRATCH1
+041     @MULFF.@SCRATCH2
+041     @DIV3232.@SCRATCH2
+042     @MULFF.@SCRATCH3
+042     @DIV3232.@SCRATCH3
+043     @MULFF.@SCRATCH4
+043     @DIV3232.@SCRATCH4
+044     @MULFF.@SCRATCH5
+044     @DIV3232.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+086     lcdtris
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const639.call
+00000D  @const641.call
+000014  @const642.call
+000018  @const643.call
+000019  @const646.call
+00001A  @const647.call
+000021  @const648.call
+000025  @const649.call
+000026  @const652.call
+000027  @const653.call
+00002E  @const654.call
+000032  @const655.call
+000033  @const679.call
+000035  @const683.call
+000038  @const684.call
+00003E  @const685.call
+000041  @const686.call
+000047  @const687.call
+00004A  @const688.call
+000050  @delay_ms1
+000065  lcd_send_nibble
+000071  lcd_read_nibble
+000077  lcd_send_byte
+00007D  lcd_read_byte
+0000B7  lcd_init
+0000EA  @ITOF
+000109  @MULFF
+00017E  lcd_gotoxy
+000190  @DIV3232
+0001DF  lcd_putc
+00020B  @PRINTF_L32D_620FPFPF
+000232  @FTOSD
+0002ED  @PSTRINGC7_620
+000343  @FLT
+000382  run_func
+00038D  medir
+0003D6  calibrar
+00041F  inicializar
+00046A  MAIN
+00046A  @cinit1
+000474  @cinit2
+
+Project Directory:
+    C:\Users\castiel\Desktop\archivos clases ccs y simulation proteus\menu\programa3\
+
+Project Files:
+    ejemplo3.c                                              [01-oct-16 20:08  CRC=F2B26B23]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f876.h [19-jul-13 15:10  CRC=A671767B]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-ago-12 09:01  CRC=D28E8746]
+
+Source signature=3E40F02A
+
+Units:
+    ejemplo3 (main)
+
+Compiler Settings:
+    Processor:      PIC16F876
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   ejemplo3.xsym
+    Errors:      ejemplo3.err
+    Ext Symbols: ejemplo3.esym
+    INHX8:       ejemplo3.hex
+    Symbols:     ejemplo3.sym
+    List:        ejemplo3.lst
+    Debug/COFF:  ejemplo3.cof
+    Project:     ejemplo3.ccspjt
+    Call Tree:   ejemplo3.tre
+    Statistics:  ejemplo3.STA
